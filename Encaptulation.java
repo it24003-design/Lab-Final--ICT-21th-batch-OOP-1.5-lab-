@@ -3,6 +3,12 @@ class Student {
     private String name;
     private double cgpa;
 
+    public Student(int id, String name, double cgpa) {
+        this.id = id;
+        this.name = name;
+        setCgpa(cgpa);
+    }
+
     public int getId() {
         return id;
     }
@@ -24,23 +30,30 @@ class Student {
     }
 
     public void setCgpa(double cgpa) {
-        if (cgpa >= 0.0 && cgpa <= 4.0) {
+        if(cgpa >= 0.0 && cgpa <= 4.0) {
             this.cgpa = cgpa;
         } else {
-            System.out.println("Invalid CGPA");
+            System.out.println("Invalid CGPA! Must be between 0.0 and 4.0.");
+            this.cgpa = 0.0;
         }
     }
-}
 
-public class  Encaptulation {
+    public void display() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("CGPA: " + cgpa);
+    }
+
     public static void main(String[] args) {
-        Student s = new Student();
-        s.setId(1);
-        s.setName("Rakibul");
-        s.setCgpa(3.6);
-        System.out.println(s.getId());
-        System.out.println(s.getName());
-        System.out.println(s.getCgpa());
-        s.setCgpa(4.5);
+        Student s1 = new Student(101, "Ferdous", 3.5);
+        s1.display();
+        System.out.println();
+
+        Student s2 = new Student(102, "Obayet", 4.5);
+        s2.display();
+
+        s2.setCgpa(3.8);
+        System.out.println("\nAfter updating CGPA:");
+        s2.display();
     }
 }

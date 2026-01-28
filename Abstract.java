@@ -1,59 +1,60 @@
-class Student {
-    private int id;
-    private String name;
-    private double cgpa;
+abstract class Shape {
+    public abstract double area();
+}
 
-    public Student(int id, String name, double cgpa) {
-        this.id = id;
-        this.name = name;
-        setCgpa(cgpa);
+interface Drawable {
+    void draw();
+}
+
+class Circle extends Shape implements Drawable {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Circle with radius " + radius);
+    }
+}
+
+class Rectangle extends Shape implements Drawable {
+    private double length, width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public double area() {
+        return length * width;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Rectangle with length " + length + " and width " + width);
     }
+}
 
-    public double getCgpa() {
-        return cgpa;
-    }
-
-    public void setCgpa(double cgpa) {
-        if(cgpa >= 0.0 && cgpa <= 4.0) {
-            this.cgpa = cgpa;
-        } else {
-            System.out.println("Invalid CGPA! Must be between 0.0 and 4.0.");
-            this.cgpa = 0.0;
-        }
-    }
-
-    public void display() {
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("CGPA: " + cgpa);
-    }
-
+public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student(101, "Ferdous", 3.5);
-        s1.display();
-        System.out.println();
+        Shape s1 = new Circle(5);
+        Shape s2 = new Rectangle(4, 6);
 
-        Student s2 = new Student(102, "Obayet", 4.5);
-        s2.display();
+        Drawable d1 = (Drawable) s1;
+        Drawable d2 = (Drawable) s2;
 
-        s2.setCgpa(3.8);
-        System.out.println("\nAfter updating CGPA:");
-        s2.display();
+        System.out.println("Circle area: " + s1.area());
+        d1.draw();
+
+        System.out.println("Rectangle area: " + s2.area());
+        d2.draw();
     }
 }
